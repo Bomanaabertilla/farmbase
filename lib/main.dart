@@ -27,7 +27,7 @@ class CropApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Crop Manager',
+        title: 'FarmBase',
         theme: buildAppTheme(),
         home: const HomeScreen(),
         debugShowCheckedModeBanner: false,
