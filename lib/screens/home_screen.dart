@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/crop_provider.dart';
 import '../widgets/crop_tile.dart';
 import '../models/crop.dart';
+import 'add_crop_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,9 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add crop screen will come later
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Add Crop Screen WIP')));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => const AddCropScreen()));
         },
         child: const Icon(Icons.add),
       ),
