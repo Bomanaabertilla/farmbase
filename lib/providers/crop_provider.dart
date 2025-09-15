@@ -60,6 +60,30 @@ class CropProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateCrop(Crop updated) async {
+    final idx = _crops.indexWhere((c) => c.id == updated.id);
+    if (idx != -1) {
+      _crops[idx] = updated;
+      await _storage.saveCrops(_crops);
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteCrop(String id) async {
+    _crops.removeWhere((c) => c.id == id);
+    await _storage.saveCrops(_crops);
+    notifyListeners();
+  }
+
+  Future<void> updateStatus(String id, CropStatus newStatus) async {
+    final idx = _crops.indexWhere((c) => c.id == id);
+    if (idx != -1) {
+      _crops[idx].status = newStatus;
+      await _storage.saveCrops(_crops);
+      notifyListeners();
+    }
+  }
+
   List<Crop> search(String query) {
     if (query.trim().isEmpty) return crops;
     final lower = query.toLowerCase();

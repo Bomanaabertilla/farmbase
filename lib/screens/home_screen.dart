@@ -4,6 +4,7 @@ import '../providers/crop_provider.dart';
 import '../widgets/crop_tile.dart';
 import '../models/crop.dart';
 import 'add_crop_screen.dart';
+import 'crop_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,9 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 return CropTile(
                   crop: crop,
                   onTap: () {
-                    // Crop detail screen will come later
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${crop.name} tapped (detail screen WIP)')));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => CropDetailScreen(crop: crop)),
+                    );
                   },
                 );
               },
