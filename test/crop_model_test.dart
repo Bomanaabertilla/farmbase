@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:crop_app/models/crop.dart';
+import 'package:farmbase/models/crop.dart';
 
 void main() {
   group('Crop Model Validation', () {
