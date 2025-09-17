@@ -15,8 +15,13 @@ i.   Android emulator
 ii.  iOS simulator
 iii. A physical device (via USB or WiFi)
 
+## Features
 
-## Crop Management
+Authentication
+Local Sign Up & Log In with persistence
+Log Out support
+
+Crop Management
 
 List crops with planting/harvest dates and status
 Add/Edit/Delete crops
