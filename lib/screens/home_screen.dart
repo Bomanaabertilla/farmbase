@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/crop_provider.dart';
+import '../providers/auth_provider.dart';
 import '../widgets/crop_tile.dart';
 import '../models/crop.dart';
 import 'add_crop_screen.dart';
@@ -24,6 +25,24 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Crops'),
+        actions: [
+          Consumer<AuthProvider>(
+            builder: (context, auth, _) {
+              if (!auth.isAuthenticated) return const SizedBox.shrink();
+              return IconButton(
+                tooltip: 'Log out',
+                icon: const Icon(Icons.logout),
+                onPressed: () async {
+                  await auth.logout();
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Logged out. See you soon!')),
+                  );
+                },
+              );
+            },
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: Padding(
@@ -35,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
               ),
               onChanged: (v) => setState(() => _search = v),
             ),
@@ -43,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: crops.isEmpty
-          ? const Center(child: Text('No crops found. Add some using the + button'))
+          ? const Center(
+              child: Text('No crops found. Add some using the + button'),
+            )
           : ListView.builder(
               itemCount: crops.length,
               itemBuilder: (context, idx) {
@@ -53,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => CropDetailScreen(crop: crop)),
+                      MaterialPageRoute(
+                        builder: (_) => CropDetailScreen(crop: crop),
+                      ),
                     );
                   },
                 );
@@ -62,7 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const AddCropScreen()));
+            context,
+            MaterialPageRoute(builder: (_) => const AddCropScreen()),
+          );
         },
         child: const Icon(Icons.add),
       ),
