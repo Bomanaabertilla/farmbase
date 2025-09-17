@@ -7,8 +7,9 @@ A Flutter project designed to help farmers track crops, manage planting & harves
 Install dependencies
 flutter pub get
 
-Run the app
+## Run the app
 flutter run
+
 In the output, you'll find options to run the app on:
 
 i.   Android emulator
